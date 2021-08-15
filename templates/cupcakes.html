@@ -1,0 +1,20 @@
+{% extends 'base.html' %}{% block title %}
+<h1 class="display-1">CupCakes</h1>
+{% endblock %}{% block content %}
+<ul>
+  {% for cupcake in cupcakes %}
+  <li></li>
+  {% endfor %}
+</ul>
+<form method="POST">
+  {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+  'hidden' %}
+  <div class="col-5">
+    {{field.label(class_='form-label')}} {{field(class_='form-control')}} {% for
+    err in field.errors %} {{err}} {% endfor %}
+  </div>
+  {% endfor %}
+  <br />
+  <button class="btn btn-outline-primary">Submit</button>
+</form>
+{% endblock %}
