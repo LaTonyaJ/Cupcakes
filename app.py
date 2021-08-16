@@ -1,3 +1,4 @@
+from werkzeug.utils import redirect
 from forms import AddCupcake
 from flask import Flask, jsonify, request
 from flask.templating import render_template
@@ -47,9 +48,10 @@ def show_single_cupcake(id):
 
 @app.route('/api/cupcakes', methods=['POST'])
 def create_cupcake():
-
-    new_cc = Cupcake(flavor=request.json["flavor"], size=request.json["size"],
-                     rating=request.json["rating"], image=request.json["image"])
+    new_cc = Cupcake(flavor=request.json["flavor"],
+                     size=request.json["size"],
+                     rating=request.json["rating"],
+                     image=request.json["image"])
 
     db.session.add(new_cc)
     db.session.commit()
@@ -86,6 +88,17 @@ def frontend():
     """Display cupcakes and add cupcake form"""
 
     form = AddCupcake()
-    cupcakes = Cupcake.query.all()
+    # cupcakes = Cupcake.query.all()
 
-    return render_template('cupcakes.html', cupcakes=cupcakes, form=form)
+    # if form.validate_on_submit():
+    #     flavor = form.flavor.data
+    #     size = form.size.data
+    #     rating = form.rating.data
+    #     image = form.image.data
+
+    #     cupcake = Cupcake(flavor=flavor, size=size, rating=rating, image=image)
+
+    #     db.session.add(cupcake)
+    #     db.session.commit()
+
+    return render_template('cupcakes.html', form=form)
