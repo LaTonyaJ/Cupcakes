@@ -1,12 +1,10 @@
 {% extends 'base.html' %}{% block title %}
 <h1 class="display-1">CupCakes</h1>
 {% endblock %}{% block content %}
-<ul>
-  {% for cupcake in cupcakes %}
-  <li></li>
-  {% endfor %}
-</ul>
-<form method="POST">
+<ul id="cupcakes_list"></ul>
+<br />
+<form id="add_cupcake" method="POST">
+  <h5 class="display-3">Add a CupCake...</h5>
   {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
   'hidden' %}
   <div class="col-5">
